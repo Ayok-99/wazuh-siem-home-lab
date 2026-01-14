@@ -89,3 +89,33 @@ File Integrity Monitoring was enabled by editing `ossec.conf` on the Windows hos
 
 ```xml
 <directories realtime="yes">C:\Users\Bubble2\OneDrive\Desktop\Wazuh-test</directories>
+
+```
+![Wazuh agent restarted after FIM config](06-wazuh-fim-ossecconf-and-test-directory.png)
+
+### 7️⃣ Restart Wazuh Agent After FIM Configuration
+
+After updating the `ossec.conf` file to include the new directory for File Integrity Monitoring, the Wazuh Agent service on the Windows host was restarted to apply the changes.
+
+The restart was performed via **Windows Services**, ensuring the updated FIM configuration was loaded successfully by the agent.
+
+This step is required whenever changes are made to `ossec.conf`.
+
+![Wazuh agent restarted after FIM config](07-wazuh-agent-restarted-after-fim-config.png)
+
+---
+
+### 8️⃣ Validate File Integrity Monitoring (Create & Delete Events)
+
+To validate that File Integrity Monitoring was working correctly, test files were **created and deleted** inside the monitored directory:
+
+```xml
+C:\Users\Bubble2\OneDrive\Desktop\Wazuh-test
+```
+These actions generated real-time FIM events, which were successfully captured and displayed in the Wazuh dashboard under:
+
+File Integrity Monitoring → Events
+
+The events clearly show file paths and actions such as added and deleted, confirming end-to-end visibility from the Windows endpoint to the SIEM dashboard.
+
+![08 file integrity monitoring create delete events](08-file-integrity-monitoring-create-delete-events.png)
